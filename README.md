@@ -37,7 +37,7 @@ And here a picture of the replica, again without low pass filter, built up with 
 Note that the bus contact fingers of the replica are not gold plated as the original.
 Gold plating is a process which needs to be negotiated directly with the PCB producer of your choice and can't be specified by a directive in the Gerber files.
 
-The replica is a nice project requiring limited budget and skills to create your first own hardware for 
+The replica is a nice project requiring limited budget and skills to create your first own hardware for your personal S-100 system.
 
 For your convenience, a copy of the original Model 6 Music Board user manual is provided,
 as well as an audio test program I once have written for diverse sound solutions for the S-100 bus,
