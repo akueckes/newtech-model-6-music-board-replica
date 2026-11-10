@@ -23,7 +23,7 @@ Assembler programming, however, is mandatory in order to feed a continuous strea
 
 This repository contains the replica KiCAD files for both the Music Board and the low pass filter PCB, as well as a BOM.
 
-There are other great replica projects around. This aim of this project is to be as close as possible to the original hardware.
+There are other great replica projects around. The aim of this project is to be as close as possible to the original hardware.
 Just a few components need to be added in order to build your own working sound solution for your S-100 based system.
 
 Just as a reference, here is a sample picture of the original hardware without low pass filter
