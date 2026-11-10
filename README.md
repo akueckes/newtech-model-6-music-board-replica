@@ -6,7 +6,7 @@ In contrast to the D+7A with its up to seven DACs, the Music Board implements ju
 and does not provide ADC or digital I/O channels for e.g. connecting joysticks or keyboards.
 
 The minimalistic design was based on a simple bus interface with address decoder,
-a digital to analog converter (DAC) built by a simple resistor ladder, and a single LM380 IC as simple low power amplifier.
+a digital to analog converter (DAC) built by a six-step resistor ladder, and a single LM380 IC as simple low power amplifier.
 
 The Music Board can be equipped with a single 2" speaker, or connected to an external amplifier via a phono jack.
 Multiple boards can be combined for stereo output.
