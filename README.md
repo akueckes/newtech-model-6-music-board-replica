@@ -21,7 +21,8 @@ Multiple voices can be mixed into a single channel, which is then output via the
 Synthesis is just a matter of software, and primarily limited by the performance of the CPU.
 Assembler programming, however, is mandatory in order to feed a continuous stream of 6-bit audio samples into the board.
 
-This repository contains the replica KiCAD files for both the Music Board and the low pass filter PCB, as well as a BOM.
+This repository contains the replica KiCAD files for both the Music Board and the low pass filter PCB.
+Please consult the Newtech User Manual for a parts list / bill of material.
 
 There are other great replica projects around. The aim of this project is to be as close as possible to the original hardware.
 Just a few components need to be added in order to build your own working sound solution for your S-100 based system.
@@ -41,4 +42,4 @@ The replica is a nice project requiring limited budget and skills to create your
 
 For your convenience, a copy of the original Model 6 Music Board user manual is provided,
 as well as an audio test program I once have written for diverse sound solutions for the S-100 bus,
-which also supports up to two Newtech Model 6 Music Boards.
+which also supports up to two Newtech Model 6 Music Boards in parallel.
