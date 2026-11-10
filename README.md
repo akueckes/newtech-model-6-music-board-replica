@@ -16,7 +16,7 @@ An optional daughter board can be added to improve the audio quality by an activ
 Due to the simplistic design, audio generation is achieved by directly and continuously driving the
 DAC by the CPU with a constant rate, producing a wave output.
 Although this keeps the CPU busy from doing other things, there are no limits concerning the type of audio output.
-Music can be produced as well as human speach or noise.
+Music can be produced as well as human voice or noise.
 Multiple voices can be mixed into a single channel, which is then output via the hardware.
 Synthesis is just a matter of software, and primarily limited by the performance of the CPU.
 Assembler programming, however, is mandatory in order to feed a continuous stream of 6-bit audio samples into the board.
