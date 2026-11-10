@@ -42,7 +42,8 @@ The replica is a nice little project requiring limited budget and skills to crea
 
 This by the way is the very first version of the replica design, please feel free to comment on any kind of improvement,
 as long as the replica itself stays as close as possible to the original. A couple of limitations are intentional, so there is for instance
-no jumper for activating/deactivating the internal speaker, and as with the original, the low pass filter needs to be added with a daughter board
+no solder mask in the Gerbers, and no jumper for activating/deactivating the internal speaker,
+and as with the original, the low pass filter needs to be added with a daughter board
 and is intentionally not integrated into the board design as with other replicas.
 
 For your convenience, a copy of the original Model 6 Music Board user manual is provided,
