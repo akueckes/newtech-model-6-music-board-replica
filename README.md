@@ -21,7 +21,8 @@ Multiple voices can be mixed into a single channel, which is then output via the
 Synthesis is just a matter of software, and primarily limited by the performance of the CPU.
 Assembler programming, however, is mandatory in order to feed a continuous stream of 6-bit audio samples into the board.
 
-This repository contains the replica KiCAD files for both the Music Board and the low pass filter PCB, as well as a BOM.
+This repository contains the replica KiCAD files for both the Music Board and the low pass filter PCB.
+Please consult the Newtech User Manual for a parts list / bill of material.
 
 There are other great replica projects around. The aim of this project is to be as close as possible to the original hardware.
 Just a few components need to be added in order to build your own working sound solution for your S-100 based system.
@@ -37,8 +38,9 @@ And here a picture of the replica, again without low pass filter, built up with 
 Note that the bus contact fingers of the replica are not gold plated as the original.
 Gold plating is a process which needs to be negotiated directly with the PCB producer of your choice and can't be specified by a directive in the Gerber files.
 
-The replica is a nice project requiring limited budget and skills to create your first own hardware for your personal S-100 system.
+The replica is a nice little project requiring limited budget and skills to create your first own hardware for your personal S-100 system.
 
 For your convenience, a copy of the original Model 6 Music Board user manual is provided,
-as well as an audio test program I once have written for diverse sound solutions for the S-100 bus,
-which also supports up to two Newtech Model 6 Music Boards.
+as well as a BDOS based audio test program I once have written for diverse sound solutions for the S-100 bus,
+which also supports up to two Newtech Model 6 Music Boards in parallel. I have created some kind of notation
+for playing music scores with multiple channels, an example is the file FANFAR, which works with two boards configured at ports 24H and 28H.
