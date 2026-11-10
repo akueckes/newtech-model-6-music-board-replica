@@ -50,3 +50,4 @@ For your convenience, a copy of the original Model 6 Music Board user manual is 
 as well as a BDOS based audio test program I once have written for diverse sound solutions for the S-100 bus,
 which also supports up to two Newtech Model 6 Music Boards in parallel. I have created some kind of notation
 for playing music scores with multiple channels, an example is the file FANFAR, which works with two boards configured at ports 24H and 28H.
+STRINGS and TRUMPS are example wave files which can be loaded for different types of instrumentation.
