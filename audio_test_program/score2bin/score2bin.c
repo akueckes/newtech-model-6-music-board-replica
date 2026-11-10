@@ -300,10 +300,10 @@
 	
 	In addition to the ASCII syntax descibed above, also MIDI files can be
 	used as a source for music data. But don't expect simply using any
-	MIDI file out there to be converted into a format optimize for the
+	MIDI file out there to be converted into a format optimized for the
 	computer sound & music hardware of the 70s. MIDI support here is rather
 	intended for using the authoring tool of your choice to comfortably
-	create your score.
+	create your score, with the limitations of the 70s in mind.
 	
 	MIDI files are usually structured into channels (one for each
 	instrument) each of which can hold an arbitrary number of notes to be
@@ -395,12 +395,12 @@
 	assigned randomly, they can't be positioned in the stereo sound space.
 
 	In fact it is recommended not to use more than 8 parts/voices for the binary
-	format, since for synchronization puposes longer notes which are played
+	format, since for synchronization purposes, longer notes which are played
 	together with short notes automatically will be broken up into shorter
 	notes tied together, which simplifies playback, but may produce inefficiently
 	large binary files from complex MIDI files.
 	
-	MIDI formats 0 and 1 are supported. So all existing MIDI tracks are processed,
+	MIDI formats 0 and 1 are supported. All existing MIDI tracks are processed,
 	but there will be no synchronization of channels across tracks. So make sure
 	no channels are used across multiples tracks.
 
