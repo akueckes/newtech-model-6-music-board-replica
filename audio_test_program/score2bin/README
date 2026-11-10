@@ -1,0 +1,447 @@
+	
+	Digital Music Score
+	===================
+	
+	Controlling a sound or music system by a digital notation already
+	goes back to the earliest attempts to control organs with punched
+	cards during the 19th century.
+	
+	During the 1970s, with computers becoming affordable also for
+	hobbyists, computer controlled sound generation quickly came into
+	the focus. One of the pioneers was Cromemco with their D+7A board,
+	which was designed during the early 70s. Also, controlling
+	synthesizers such as MOOG with a computer became a topic.
+	
+	At the same time, many articles in popular electronics & computer
+	magazines such as Popular Electronics or BYTE Magazine appeared,
+	where the relationsship between computers and music and possible
+	applications were discussed. Simple hardware designs were created,
+	and first music notations were drafted which could be automatically
+	processed by a computer. A commercial example is MUS-X!, a music
+	language originally developed by Solid State Music for their SB-1
+	sound board.
+	
+	With all the hardware solutions in mind which came up during the
+	1970s, there can be four different approaches identified. The first
+	and oldest one is simply a tick created by a write to a certain
+	memory location. The second approach was utilizing a DAC, which
+	is directly driven by a stream of audio samples. Another option
+	was to implement a full synthesizer with envelopes, wavetables,
+	attack and decay on a single board. And finally there were boards
+	which utilized so-called programmable sound processors (PSGs) as
+	audio generators, which also includes hybrid digital/analog
+	solutions.
+	
+	I tried to create a new notation which covers all what is already
+	included in MUS-X1, but also supports noise generation. The
+	result differs significantly from MUS-X1 with respect to
+	representation, though.
+	
+	At least two representations are needed, one is for the human
+	writer, who needs to transfer classical, paper based scores
+	into a still human readable but ASCII based language. It should
+	make it as easy as possible to transfer the original score
+	without errors.
+	
+	The other representation should be as compact and as efficient
+	as possible to be processed with respect to the limited hardware
+	resources of the 1970s - consequently, a binary format.
+	
+	Both representations are described below, including a dedicated
+	program which does the translation from the ASCII based notation
+	into the binary format.
+
+
+	1. Binary Format
+	----------------
+
+	The binary format is primarily optimized for efficient processing and
+	compactness, and basically consists of a sequence of music or noise
+	events, plus general control commands. Each event is at least one byte,
+	the control byte, describing a command number in the lower three bits,
+	plus a parameter in the upper nibble. A value of zero in both fields
+	terminates the score.
+
+	A special flag (X) controls whether a general control command is
+	effective for all voices, or for just a selected single voice, which
+	needs to be specified in a byte following the control command.
+	
+	Bit   7   6   5   4   3   2   1   0
+	    +---+---+---+---+---+---+---+---+
+	    | X |  COMMAND  |   PARAMETER   |
+	    +---+---+---+---+---+---+---+---+  
+
+	Currently the following commands are supported:
+
+	Command description
+
+	   0    End of score (terminates the playback)
+	   1    Play music/noise event (parameter holds duration, extra bytes hold
+	        pitches for individual voices plus tie flag)
+	   2    Set volume/amplitude (parameter holds volume)
+	   3    Set waveform (parameter holds waveform)
+	   4    Set envelope (parameter holds envelope preset)
+	   5    Set number of voices (parameter holds number of voices)
+	   6    Set metronome/tempo (extra byte holds tempo in beats per minute)
+	   7    Set tune vs. noise mode for all voices (parameter assigns mode
+	        with 0=tune and 1=noise)
+
+	The X bit (bit 7) of the control byte, if set, indicates that the
+	command shall be applied to a specific voice only. In this case,
+	another complementary byte with voice information follows the
+	control byte:
+
+	Bit   7   6   5   4   3   2   1   0
+	    +---+---+---+---+---+---+---+---+
+	    |             VOICE             |
+	    +---+---+---+---+---+---+---+---+
+
+	If X is clear, the change applies to all voices, and no additional
+	byte is following the control byte.
+
+	A value of 1 in the command field denotes a music or noise event,
+	with the assigned duration in the parameter field, which is
+	valid for 1-8 following bytes, depending on the current number
+	of parts/voices.
+
+	Value Ratio     Meaning
+
+	   0:           (reserved)
+	   1: 1.5       full note with dot
+	   2: 1.0       full note
+	   3: 0.75      half note with dot
+	   4: 0.5       half note
+	   5: 0.375     quarter note with dot
+	   6: 0.25      quarter note
+	   7: 0.1875    eigth note with dot
+	   8: 0.166666  1/3 half note
+	   9: 0.125     eigth note
+	  10: 0.09375   sixteenth note with dot
+	  11: 0.083333  1/3 quarter note
+	  12: 0.0625    sixteenth note
+	  13: 0.046875  thirty-second note with dot
+	  14: 0.041666  1/3 eigth note
+	  15: 0.03125   thirty-second note
+
+	The volume/dynamics can be controlled separately for each voice	in
+	16 steps including silence (0=silence, 15=full volume) and is set with
+	the volume command.
+
+	Likewise, the desired waveform can be assigned separately for each
+	voice, allowing different sound variations or instruments for
+	each player. By default, waveform #0 can normally be assumed as a
+	pure sinus wave (unless assigned otherwise) whereas waveform #15
+	holds data for periodic noise (such as engines sound).
+
+	Encoding for dynamics/playback volume is
+	
+	   0: silence
+	   1: pianississimo (ppp)
+	   2: pianissimo (pp)
+	   3: piano (p)
+	   4: mezzo piano (mp)
+	   5: mezzo forte (mf)
+	   6: forte (f)
+	   7: fortissimo (ff)
+	   8: fortissimissimo (fff)
+   
+	For a command value of 1, the control byte is followed by a fixed
+	number of note bytes, each representing one voice, which will be
+	processed in parallel in order to describe chords or parts for
+	different voices or instruments. Each note byte consists of a tone
+	value for 127 individual pitches spanning up to 10 octaves in the
+	lower 7 bits, plus a tie flag in the MSB.
+
+	Bit   7   6   5   4   3   2   1   0
+	    +---+---+---+---+---+---+---+---+
+	    | T |         PITCH             |
+	    +---+---+---+---+---+---+---+---+  
+
+	A note byte with zero value tells the computer to play a rest (silence)
+	with its length controlled by the duration in the control byte. The
+	tie flag T controls whether the note shall be combined with the
+	following note, normally with articulation only on the first note
+	(slur). A cleared tie bit will introduce an articulation as short
+	period of silence between two subsequent notes.
+
+	The idea for processing multiple voices is that the playback algorithm
+	has a fixed starting clock for achieving synchronous playback of
+	all voices, combining all voices into a single event, which then can
+	be implemented in a much simpler way, than having to manage separate
+	events for every voice.
+
+	Because individual notes over different voices can differ in their
+	duration, longer notes need to be created by "glueing" together
+	multiple tones with the tie flag set. As an example, if there
+	is a half note in one voice starting together with two quarter notes
+	in another voice, the two quarter notes demand two events to be
+	processed. The half note in the first voice is created by linking
+	two quarter notes with the tie flag into one half note.
+
+
+	2. ASCII score notation
+	-----------------------
+
+	The notation described here is based on Hal Taylor's SCORTOS suggestion
+	for an ASCII based music language from the September 1977 issue of the
+	BYTE magazine, but modified and extended for general sound processors
+	including wavetable synthesis and especially for use with the Cromemco
+	D+7A digital analog converter.
+
+	Each score consists of general controls (such as a key signature,
+	a time signature, a metronome mark, the number of parts/voices, current
+	part /voice, current octave, volume/dynamics, waveforms for instruments
+	and envelopes), flow control (left hand repeat, right hand repeat),
+	structure information (bars), events (notes, noise or rests), and
+	comments.
+
+	The score notation supports up to 8 parts/voices (sufficient for e.g.
+	six tone parts and two noise parts). Volume/dynamics, waveform and
+	envelope can be selected either for all voices or per individual voice.
+
+	General controls can be placed between events anywhere in the score
+	and are effective until changed with another control command:
+
+	  Control                   Syntax                 Default
+	  
+	  Key signature:            K[1..7][#|b]           K    (C major/A minor)
+	  Time signature:           T[2..8]/[2..8]         T4/4
+	  Metronome mark:           M[1-256]               M120 (120 beats per minute)
+	  Number of parts/voices:   N[1..16]               N1   (1 part)
+	  Current part/voice:       P[1..16]               P1
+	  Current octave:           O[-1..9]               O4
+	  Volume/dynamics:          V<volume>[@<voice>]    V9   (mezzo forte)
+	  Waveform:                 W<waveform>[@<voice>]  W0   (normally sinus wave)
+	  Envelope:                 E<envelope>[@<voice>]  E0   (no envelope)
+	  Transposition:            [+|-]<halftones>       +0   (no transposition)
+
+	where
+
+	  <voice> := [1..16]
+	  <volume> := [0..15]       (0=silence)
+	  <waveform> := [1..16]     (1-15 wavetable synthesis, 16=noise)
+	  <envelope> := [0..15]     (0=no envelope)
+
+	Encoding for dynamics/playback volume is
+
+	    0: silence
+	    1: pianississimo (ppp)
+	    3: pianissimo (pp)
+	    5: piano (p)
+	    7: mezzo piano (mp)
+	    9: mezzo forte (mf)
+	   11: forte (f)
+	   13: fortissimo (ff)
+	   15: fortissimissimo (fff)
+
+	It is up to the sound processor how to deal with the above specs.
+	This especially applies to the assignment of voices to (stereo)
+	output channels. Different volumes can be implemented by waveforms
+	with matching amplitudes.
+	
+	Envelope presets can be implemented via	amplitude tables (similar
+	to waveforms) or parameterized e.g. via attack, alternate, hold and
+	continue.
+	
+	Noise can be implemeneted as periodic noise with waveforms or as
+	white noise with appropriate white noise generators.
+  
+
+	Events
+	------
+
+	An event is either a tone event (denoted by the note as a letter with
+	octave for the pitch, such as C4 or D5, with optional modifiers - # for
+	sharp, b for flat and n for natural), a noise event (denoted by N
+	followed by a pitch of 1 to 255), or a rest event (denoted by R).
+	The tone pitch is calibrated to A4 = 440 Hz.
+
+	Each event has a duration as a value of 1, 2, 4, 8, 16 or 32 for
+	1/1, 1/2, 1/4, 1/8, 1/16 or 1/32 notes, and can be combined with a
+	dot for 1.5 times lengthening.
+
+	Example: play a singe voice D major scale of eigth notes
+
+	  8D4,8E4,8F#4,8G4,8A4,8B4,8C#4,8D5
+
+	Each event can be "glued" to its following event with ^. Normally,
+	there is an accent between two events, so that the listener can
+	separate them. ^ stands for a slur or tie, playing an event with
+	its follower without accent in between.
+
+	Example: same as above, but with tie
+
+	  8D4^,8E4^,8F#4^,8G4^,8A4^,8B4^,8C#4^,8D5
+
+	Each voice has a current volume, waveform and envelope assigned to it.
+	Each event is described by its duration, followed by what happens on
+	each voice (playing a tone, playing noise or playing a rest).
+
+	Each voice can include a ^ to indicate a tie to the same voice in
+	the next event.
+
+	  <event> := <duration>[<tone>|<noise>|<rest>][^][,[<tone>|<noise>|<rest>][^]]
+
+	where
+
+	  <duration> := [1,2,4,8,16,32][.]
+	  <tone> := <note>[<modifier>][<octave>]
+	  <note> := [C,D,E,F,G,A,B]
+	  <noise> := N
+	  <rest> := R
+	  <modifier> := #|b|n
+	  <octave> := [0..9]
+	  <pitch> := [0..127]
+
+	The notation supports up to 127 tone values. Each tone is made up of a
+	note (one of C, D, E, F, G, A, B) plus an optional modifier (either #
+	for sharp, b for flat or n for neutral) and also optionally the octave
+	(-1 to 9). If the octave is omitted, the octave	will be either the default
+	octave 4, or the octave set with the O command for the current part/voice.
+	A pitch of 0 denotes silence for playing breaks.
+
+	Same applies to pitch values for noise events (128 pitch values where 0
+	again denotes silence).
+
+	In fact the wide range of midi pitches is of limited use, especially
+	for the extreme high and low ranges.
+
+
+	Structure
+	---------
+
+	Notes can be grouped into measures with bars and combined into tuplets
+	using parenthesis. Also, repeat sequences may be defined.  Currently,
+	only triplets are supported as the are by far most common type of
+	tuplets.
+
+	  Bar:          | or /
+	  Tuplet:       (...)
+	  Repeat:       [ or ]
+	  End of score: @ or End-of-file (EOF)
+  
+	If framed by brackets, sequences will be repeated once.
+
+	The total duration of each triplet is defined by the duration value.
+	For example, three sixteenth notes (value 16) in a triple combine to
+	the duration of one eigth note, three eigth notes (value 8) in a
+	triple combine to the duration of one quarter note and so on.
+
+	For better readability, whitespace and commas my be inserted as
+	needed.
+
+	Example:
+
+	A valid example for an ASCII notation for two voices:
+   
+	(comma separators increase readability but can be omitted).
+
+
+	3. MIDI
+	-------
+	
+	In addition to the ASCII syntax descibed above, also MIDI files can be
+	used as a source for music data. But don't expect simply using any
+	MIDI file out there to be converted into a format optimize for the
+	computer sound & music hardware of the 70s. MIDI support here is rather
+	intended for using the authoring tool of your choice to comfortably
+	create your score.
+	
+	MIDI files are usually structured into channels (one for each
+	instrument) each of which can hold an arbitrary number of notes to be
+	played simultaneously as chords. So the overall number of voices can
+	easily exceed the number of voices supported by your sound hardware.
+	
+	Voices in a MIDI file can be mapped to the binary format basically
+	in two different ways. The most natural way is to assign each MIDI
+	channel to a fixed part, since MIDI channels in general represent
+	instruments. This is also the only way for positioning a channel in
+	the stereo space, and the default way mapping is done by this program.
+	
+	Some instruments, however, are polyphonic in their nature, such as
+	keyboards or guitars, so that MIDI channels can contain more than a
+	single voice. In that case, notes in chords need to be assigned
+	dynamically to "free" parts when they appear, which can be configured
+	on demand if necessary.
+
+	MIDI has almost no limitation on the duration of notes, since the
+	duration of each note is specified in (very short) ticks instead of
+	multiples of a fraction of a whole note, as it is with the compact
+	binary format used here, which uses multiples of 1/32 notes
+	including dotted notes.
+
+	MIDI allows any kind of tuplet, whereas the binary format used here
+	currently is supporting only triplets, which is by far the most common
+	type of tuplet.
+
+	Dynamics in MIDI are specified with a resolution of 128 different volumes.
+	The binary format is using up to 16 different volumes, including silence.
+	The values used by MIDI will automatically be translated in the proper
+	binary format.
+
+	Finally, MIDI offers much more control, such as aftertouch or pitch wheels,
+	which currently can't be reproduced with the binary format. None of the
+	MIDI format 3 special features are supported.
+
+	So please make sure that the total number of voices in the MIDI	file
+	matches the maximum number of voices you want for your hardware, and that
+	no notes shorter than 1/32 are included, and no tuplets other than triplets
+	are used.
+
+	MIDI files will be automatically processed if the input file has a
+	filename extension .mid or .midi. If any of the limitations listed
+	above applies, the program will output an appropriate warning.
+
+	Usage:
+
+	  score2bin <input-file> [-a [<assembler-file>]] [-b <binary-file>}
+
+	<assembler-file> denotes the filename of a file which shall hold the
+	music code in Intel 8080 format for copy & paste into a assembler
+	program.
+
+	<binary-file> specifies a file which shall hold the output as byte
+	code.
+
+	When using this program without parameters, the Intel 8080 assembler
+	code will be output to the console.
+	
+	By default, MIDI channels are mapped to parts in a 1:1 fashion. You
+	may change this mapping with the -m option, such as
+
+	  score2bin musicfile.mid -m 1:3,2:4
+
+	which reassigns MIDI channel 3 to part #1 and MIDI channel 4 to part #2.
+	The mapping for all other voices remains unchanged.
+	
+	Alternatively, the program can run in a mode assigning the MIDI voices
+	dynamically to the available parts.
+
+	Normally, the number of parts for the output will match the number
+	of channels in the MIDI file. You may change the number of voices with
+	the -n option, such as
+
+	  score2bin musicfile.mid -n 2
+
+	which reduces the number of parts to 2, using just the first two channels
+	in the MIDI file. You still may map the two parts to other tracks with
+	the -m option.
+	
+	Dynamic assignment of voices can be activated with the -d option. The program
+	then handles notes when they have to be played in a round robin scheme,
+	assigning them to any free part:
+	
+	  score2bin musicfile.mid -d
+	  
+	In case no free part is available, notes will be dropped. As the notes are
+	assigned randomly, they can't be positioned in the stereo sound space.
+
+	In fact it is recommended not to use more than 8 parts/voices for the binary
+	format, since for synchronization puposes longer notes which are played
+	together with short notes automatically will be broken up into shorter
+	notes tied together, which simplifies playback, but may produce inefficiently
+	large binary files from complex MIDI files.
+	
+	MIDI formats 0 and 1 are supported. So all existing MIDI tracks are processed,
+	but there will be no synchronization of channels across tracks. So make sure
+	no channels are used across multiples tracks.

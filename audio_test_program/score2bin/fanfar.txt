@@ -1,0 +1,57 @@
+; -----------------------------
+; 20th Century Fox Fanfare
+; -----------------------------
+;
+; Bb major
+K2b
+; 120 beats per minute
+M120
+; number of parts
+N2
+; half volume
+V8
+; part 1
+P1
+; snare drum + rest
+8N80,8N80,8R,|
+; snare drum + rest
+8N80,8N80,8R,|
+; snare drum + rest
+2N80,8N80,8N80,8R,|
+;
+; player 2
+P2
+; snare drum + rest
+8N80,8N80,8R,|
+; snare drum + rest
+8N80,8N80,8R,|
+; snare drum + rest
+2N80,8N80,8N80,8R,|
+;
+; wavetable 0 (=sinus wave)
+W0
+; full volume
+V8
+; player 1
+P1
+8.F5,32F5,32F5,4F5^,(8F5,8Gb5,8F5),(8G5,8F5,8G5),|
+8.F5,32F5,32F5,(8F5,8F5,8F5),(8F5,8F5,8F5),(8F5,8D5,8E5),|
+8.F5,32F5,32F5,4F5^,8F5,8R,(8B5^,8D6^,8F6),|
+;
+4G6^,8.G6^,32G6^,32G6^,4G6,(8C6^,8E6^,8G6),|
+4B6^,8.B6^,32B6^,32B6^,4B6,8B6^,8C6,8E6,8Gb,|
+4B6^,(8B6,8B6,8B6),1B6^,|
+4B6
+; player 2
+P2
+O4
+8.F,32F,32F,4F4^,(8F4,8D4,8F4),(8D4,8F4,8D4),|
+8.F4,32F4,32F4,(8F4,8F4,8F4),(8F4,8F4,8F4),(8F4,8G4,8E4),|
+8.F4,32F4,32F4,4F4^,8F4,8R,(8B3^,8D4^,8F4),|
+;
+4G4,8.E5,32E5,32E5,4E5,(8B3^,8D4^,8F4),|
+4B4,8.E5,32E5,32E5,4E5,8E5^,8E5^,8E5,86R,|
+4B4^,(8B5,8D5,8E5),1F5^,|
+4F5
+; end of score
+@
