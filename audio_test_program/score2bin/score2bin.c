@@ -119,8 +119,9 @@
 	with its length controlled by the duration in the control byte. The
 	tie flag T controls whether the note shall be combined with the
 	following note, normally with articulation only on the first note
-	(slur). A cleared tie bit will introduce an articulation as short
-	period of silence between two subsequent notes.
+	(slur). A cleared tie bit will introduce an articulation, e.g. by
+	using a combination or release and attack, or by simply playing a
+	very short rest between the notes.
 
 	The idea for processing multiple voices is that the playback algorithm
 	has a fixed starting clock for achieving synchronous playback of
@@ -135,6 +136,11 @@
 	in another voice, the two quarter notes demand two events to be
 	processed. The half note in the first voice is created by linking
 	two quarter notes with the tie flag into one half note.
+	
+	If shaping notes with envelopes, the first note in a chain of tied
+	together notes will be the only one with an attack (and possibly
+	a decay), whereas only the last note will have a realease, and all
+	others are being played with hold.
 
 
 	2. ASCII score notation
@@ -287,12 +293,6 @@
 
 	For better readability, whitespace and commas my be inserted as
 	needed.
-
-	Example:
-
-	A valid example for an ASCII notation for two voices:
-   
-	(comma separators increase readability but can be omitted).
 
 
 	3. MIDI
