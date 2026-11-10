@@ -40,6 +40,11 @@ Gold plating is a process which needs to be negotiated directly with the PCB pro
 
 The replica is a nice little project requiring limited budget and skills to create your first own hardware for your personal S-100 system.
 
+This by the way is the very first version of the replica design, please feel free to comment on any kind of improvement,
+as long as the replica itself stays as close as possible to the original. A couple of limitations are intentional, so there is for instance
+no jumper for activating/deactivating the internal speaker, and as with the original, the low pass filter needs to be added with a daughter board
+and is intentionally not integrated into the board design as with other replicas.
+
 For your convenience, a copy of the original Model 6 Music Board user manual is provided,
 as well as a BDOS based audio test program I once have written for diverse sound solutions for the S-100 bus,
 which also supports up to two Newtech Model 6 Music Boards in parallel. I have created some kind of notation
