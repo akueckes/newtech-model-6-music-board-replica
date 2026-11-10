@@ -1,5 +1,4 @@
-# Heading level 1
-Welcome to another replica project for the Newtech Model 6 Music Board
+# Welcome to another replica project for the Newtech Model 6 Music Board
 
 The Model 6 Music Board from Newtech Computer Systems was launched in 1977 as a low cost alternative to other,
 more expensive sound solutions for the S-100 bus like the D+7A from Cromemco.
