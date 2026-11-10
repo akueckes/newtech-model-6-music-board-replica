@@ -14,7 +14,7 @@ Multiple boards can be combined for stereo output.
 An optional daughter board can be added to improve the audio quality by an active low pass filter.
 
 Due to the simplistic design, audio generation is achieved by directly and continuously driving the
-DAC by he CPU with a constant rate, producing a wave output.
+DAC by the CPU with a constant rate, producing a wave output.
 Although this keeps the CPU busy from doing other things, there are no limits concerning the type of audio output.
 Music can be produced as well as human speach or noise.
 Multiple voices can be mixed into a single channel, which is then output via the hardware.
