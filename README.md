@@ -2,7 +2,7 @@
 
 The Model 6 Music Board from Newtech Computer Systems was launched in 1977 as a low cost alternative to other,
 more expensive sound solutions for the S-100 bus like the D+7A from Cromemco.
-In contrast to the D+7A with its up to seven bidirectional analog channels, the Music Board implements just a single audio channel
+In contrast to the D+7A with its up to seven bidirectional analog channels, the Newtech board implements just a single audio channel
 and does not provide input channels for e.g. connecting joysticks or keyboards.
 
 The minimalistic design was based on a simple bus interface with address decoder,
