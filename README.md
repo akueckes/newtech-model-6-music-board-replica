@@ -19,7 +19,7 @@ Although this keeps the CPU busy from doing other things, there are no limits co
 Music can be produced as well as human speach or noise.
 Multiple voices can be mixed into a single channel, which is then output via the hardware.
 Synthesis is just a matter of software, and primarily limited by the performance of the CPU.
-Assembler programming, however, is mandatory in order to feed a continuous stream of samples into the board.
+Assembler programming, however, is mandatory in order to feed a continuous stream of 6-bit audio samples into the board.
 
 This repository contains the replica KiCAD files for both the Music Board and the low pass filter PCB, as well as a BOM.
 
