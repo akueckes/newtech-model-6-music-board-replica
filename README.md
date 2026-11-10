@@ -41,5 +41,6 @@ Gold plating is a process which needs to be negotiated directly with the PCB pro
 The replica is a nice little project requiring limited budget and skills to create your first own hardware for your personal S-100 system.
 
 For your convenience, a copy of the original Model 6 Music Board user manual is provided,
-as well as an audio test program I once have written for diverse sound solutions for the S-100 bus,
-which also supports up to two Newtech Model 6 Music Boards in parallel.
+as well as a BDOS based audio test program I once have written for diverse sound solutions for the S-100 bus,
+which also supports up to two Newtech Model 6 Music Boards in parallel. I have created some kind of notation
+for playing music scores with multiple channels, an example is the file FANFAR, which works with two boards configured at ports 24H and 28H.
