@@ -58,8 +58,8 @@
 	The binary format is primarily optimized for efficient processing and
 	compactness, and basically consists of a sequence of music or noise
 	events, plus general control commands. Each event is at least one byte,
-	the control byte, describing a command number in the lower three bits,
-	plus a parameter in the upper nibble. A value of zero in both fields
+	the control byte, describing a command number in the upper four bits,
+	plus a parameter in the lower nibble. A value of zero in both fields
 	terminates the score.
 
 	A special flag (X) controls whether a general control command is
