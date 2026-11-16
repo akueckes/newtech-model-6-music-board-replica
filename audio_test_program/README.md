@@ -16,6 +16,9 @@ SELECT ONE OF:
 1 CROMEMCO D+7A (D/A CONVERTER)
 2 NEWTECH MUSIC BOARD (D/A CONVERTER)
 3 SOLID STATE MUSIC SB-1 (SYNTHESIZER)
+
+- 2
+-> CURRENT HARDWARE IS MUSIC BOARD AT I/O BASE 24H+28H
 ```
 Then check whether the hardware is configured to the I/O port address
 suggested by the program (e.g. 24H as base address for the Newtech or 18H as
