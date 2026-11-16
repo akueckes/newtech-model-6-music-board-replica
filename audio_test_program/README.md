@@ -6,12 +6,22 @@ The AUDIO program needs CP/M to run and is currently supporting four different s
 - Solid State Music SB-1 (synthesizer)
 
 Since there usually is no way to
-autodetect them, you need to first select your hardware with the SELECT HARDWARE
-function. Then check whether the hardware is configured to the I/O port address
+autodetect them, after entering you CPU clock speed, you need to first select your
+hardware with the SELECT HARDWARE function:
+```
+- h
+SELECT ONE OF:
+
+0 ADS NOISEMAKER (AY-3-8910)
+1 CROMEMCO D+7A (D/A CONVERTER)
+2 NEWTECH MUSIC BOARD (D/A CONVERTER)
+3 SOLID STATE MUSIC SB-1 (SYNTHESIZER)
+```
+Then check whether the hardware is configured to the I/O port address
 suggested by the program (e.g. 24H as base address for the Newtech or 18H as
 base address for the D+7A).
 
-Then check with the PLAY TONE function whether the audio hardware is working in
+Now check with the PLAY TONE function whether the audio hardware is working in
 general, e.g. with
 ```
 - t
