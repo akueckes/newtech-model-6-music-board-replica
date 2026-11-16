@@ -61,3 +61,10 @@ one for each channel.
 
 See the documentation for the score2bin program for a reference on the music
 score notation. You may use the file fanfar.txt as an example to create your own music scores.
+
+Limitations:
+
+The AUDIO program ist currently limited to two voices/channels and can't mix multiple
+voices into one channel during playback. The next release is intended to support true
+polyphony, which probably will require a CPU clock of at least 4 MHz with DAC based boards
+like the D+7A and the Newtech Music Board.
