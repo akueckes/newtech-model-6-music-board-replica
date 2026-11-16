@@ -1,4 +1,11 @@
-The AUDIO program is currently supporting four different sound boards. Since there usually is no way to
+The AUDIO program needs CP/M to run and is currently supporting four different sound boards:
+
+- ADS Noisemaker (GI-AY-8910)
+- Cromemco D+7A (DAC)
+- Newtech Model 6 Music Board (DAC)
+- Solid State Music SB-1 (synthesizer)
+
+Since there usually is no way to
 autodetect them, you need to first select your hardware with the SELECT HARDWARE
 function. Then check whether the hardware is configured to the I/O port address
 suggested by the program (e.g. 24H as base address for the Newtech or 18H as
