@@ -34,7 +34,7 @@ PITCH (HEX 0-FFFF): 1000
 ```
 If you now hear a short sound everything should work. If not, double check the
 hardware configuration. You may try different pitch values and leave the play
-mode by just hitting <ENTER> without any input.
+mode by just hitting \<ENTER\> without any input.
 
 Next would be to try playing a music score file, there is just one score file
 included as an example:
