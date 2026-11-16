@@ -59,6 +59,5 @@ channels 1 (port 19H) and 3 (port 1BH), which are the defaults for using the
 D+7A with JS-1 joysticks for audio. For the Newtech you would need two boards,
 one for each channel.
 
-You may use the file FANFAR as an example to create your own music scores.
 See the documentation for the score2bin program for a reference on the music
-score notation.
+score notation. You may use the file fanfar.txt as an example to create your own music scores.
