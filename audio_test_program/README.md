@@ -5,6 +5,27 @@ The AUDIO program needs CP/M to run and is currently supporting four different s
 - Newtech Model 6 Music Board (DAC)
 - Solid State Music SB-1 (synthesizer)
 
+When executed, the AUDIO program first asks for the CPU clock of the current processor.
+
+The program then prints a welcome message and a command overview:
+
+```
+-> CURRENT HARDWARE IS D+7A AT I/O BASE 18H
+
+SELECT ONE OF:
+
+H SELECT HARDWARE
+T PLAY TONE
+N PLAY NOISE
+F PLAY SAMPLE FILE
+S PLAY SCORE FILE
+W LOAD WAVE TABLE FILE
+A AUDIO TEST
+J JOYSTICK TEST
+Q QUIT
+
+-
+```
 Since there usually is no way to
 autodetect them, after entering you CPU clock speed, you need to first select your
 hardware with the SELECT HARDWARE function:
@@ -44,6 +65,9 @@ FILENAME: fanfar
 ```
 This of course requires the file FANFAR to be in te same directory as AUDIO.COM.
 
+See the documentation for the score2bin program for a reference on the music
+score notation. You may use the file fanfar.txt as an example to create your own music scores.
+
 The AUDIO program by default uses sine waves for output. The files STRINGS and
 TRUMPS are example wave form files, which can be loaded to change
 instrumentation e.g. via
@@ -59,8 +83,15 @@ channels 1 (port 19H) and 3 (port 1BH), which are the defaults for using the
 D+7A with JS-1 joysticks for audio. For the Newtech you would need two boards,
 one for each channel.
 
-See the documentation for the score2bin program for a reference on the music
-score notation. You may use the file fanfar.txt as an example to create your own music scores.
+DAC based sound boards also can play files containing 2-channel signed 8-bit
+audio samples with the command PLAY SAMPLE FILE.
+Please note that the file must contain sample data only, without file header.
+So the usual audio file formats such as .WAV have to be converted first.
+There is no sample file included.
+
+The joystick test simply outputs the input data from the appropriate I/O
+ports and is applicable for D+7A boards only.
+
 
 Limitations:
 
