@@ -7,7 +7,7 @@ The AUDIO program needs CP/M to run and is currently supporting four different s
 
 When executed, the AUDIO program first asks for the CPU clock of the current processor.
 
-The program then prints a welcome message and a command overview:
+The program then prints a config message and a command overview:
 
 ```
 -> CURRENT HARDWARE IS D+7A AT I/O BASE 18H
