@@ -26,8 +26,8 @@ Q QUIT
 
 -
 ```
-Since there usually is no way to
-autodetect them, after entering you CPU clock speed, you need to first select your
+Default hardware is a Cromemco D+7A. Since there usually is no way to
+autodetect the sound hardware, you might need to change the
 hardware with the SELECT HARDWARE function:
 ```
 - h
