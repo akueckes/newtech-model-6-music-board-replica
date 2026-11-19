@@ -86,8 +86,8 @@ one for each channel.
 DAC based sound boards also can play files containing 2-channel signed 8-bit
 audio samples with the command PLAY SAMPLE FILE.
 Please note that the file must contain sample data only, without file header.
-So the usual audio file formats such as .WAV have to be converted first.
-There is no sample file included.
+So the common audio file formats such as .WAV have to be converted first.
+There currently is no sample file included.
 
 The joystick test simply outputs the input data from the appropriate I/O
 ports and is applicable for D+7A boards only.
