@@ -5,6 +5,8 @@ The AUDIO program needs CP/M to run and is currently supporting four different s
 - Newtech Model 6 Music Board (DAC)
 - Solid State Music SB-1 (synthesizer)
 
+All files are also included in the disc image file audio.dsk (IBM 3740 format).
+
 When executed, the AUDIO program first asks for the CPU clock of the current processor.
 
 The program then prints a config message and a command overview:
