@@ -57,6 +57,31 @@ If you now hear a short sound everything should work. If not, double check the
 hardware configuration. You may try different pitch values and leave the play
 mode by just hitting \<ENTER\> without any input.
 
+Some sound boards like the Cromemco D+7A and the Newtech Model 6 Music Board
+support playback of PCM audio files. Although the capacities on early S-100
+computers like the Altair and the IMSAI are limited to the amount of RAM,
+it is possible to play PCM files with the PLAY SAMPLE FILE command:
+
+```
+- f
+FILENAME: voice
+....................................................................................................................................
+SPEED (HEX 0-FF OR <ENTER> FOR DEFAULT): 
+LOOP (Y/N): n
+STEREO (Y/N): y
+- f
+FILENAME: hal
+......................................................................................................................................................................................................................
+SPEED (HEX 0-FF OR <ENTER> FOR DEFAULT): 
+LOOP (Y/N): n
+STEREO (Y/N): n
+- 
+```
+Being asked for SPEED just hit \<ENTER\> (you later can tune playback speed here). Files should hold raw data
+without file header, either with signed 8 bit per sample (mono) or two times signed 8 bit per sample (stereo),
+recorded with a sampling rate of 8 kHz. VOICE is an example file for stereo audio and needs 16K of free RAM,
+whereas HAL is an example for mono audio, requiring 27K of free RAM (at least 48K RAM for the whole system).
+
 Next would be to try playing a music score file, there is just one score file
 included as an example:
 ```
