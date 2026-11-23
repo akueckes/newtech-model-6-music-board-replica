@@ -92,7 +92,7 @@ included as an example:
 - s
 FILENAME: fanfar
 ```
-This of course requires the file FANFAR to be in te same directory as AUDIO.COM.
+This of course requires the file FANFAR to be in the current directory.
 
 See the documentation for the score2bin program for a reference on the music
 score notation. You may use the file fanfar.txt as an example to create your own music scores.
