@@ -83,6 +83,8 @@ Being asked for SPEED just hit \<ENTER\> (you later can tune playback speed here
 without file header, either with signed 8 bit per sample (mono) or two times signed 8 bit per sample (stereo),
 recorded with a sampling rate of 8 kHz. VOICE is an example file for stereo audio and needs 16K of free RAM,
 whereas HAL is an example for mono audio, requiring 27K of free RAM (at least 48K RAM for the whole system).
+Using a sampling rate of 8 kHz produces roughly 8 kbytes of sample data per second for mono and twice the
+data for stereo. It is not possible to directly play the audio from disc.
 
 Next would be to try playing a music score file, there is just one score file
 included as an example:
